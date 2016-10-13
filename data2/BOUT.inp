@@ -37,7 +37,6 @@ g_11 = 1 / g11
 g_22 = 1 / g22
 g_33 = 1 / g33
 
-J = Bxy
 
 ### Uncomment next 2 lines to allow non-periodic B.C. in y 
 #ixseps1 = 0
