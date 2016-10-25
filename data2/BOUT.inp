@@ -80,8 +80,8 @@ chi = 1
 # bndry_all
 # bndry_xin <- "left" x-point
 # bndry_xout <- "right" x-point
-# bndry_down <- "left" y-point
-# dbndry_up <- "right" y-point
+# bndry_ydown <- "left" y-point
+# dbndry_yup <- "right" y-point
 #################
 
 bndry_xin = neumann
