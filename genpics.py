@@ -1,3 +1,5 @@
+### Generating picture frames to a "pic" folder
+
 #from pylab import *
 import numpy as np
 from time import sleep
