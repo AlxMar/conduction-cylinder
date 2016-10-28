@@ -1,0 +1,98 @@
+##################################
+# Input file for conduction model
+##################################
+
+nout = 70       # Number of output timesteps
+timestep = 0.01  # Time between outputs
+
+#non_uniform = true
+
+MZ = 2
+zmin = 0.
+zmax = 1.
+
+[mesh]  # Mapping to cylinder: x -> r,  y -> phi,  z -> z
+
+nx = 68 # including 2*2 ghost points
+ny = 128
+
+Rmin = 0.05
+Rmax = 1.8
+
+Rxy = Rmin + (Rmax - Rmin)*x   # Rxy = [Rmin, ..., Rmax]
+dr = (Rmax - Rmin) / (nx-4) #ny
+
+Lz = 1.0
+dx = dr #Lz/(nx-4)
+dy = 2*pi/ny #dr
+
+### Contravariant metric tensor components
+g11 = 1.0
+g22 = 1.0/Rxy^2
+g33 = 1.0
+
+### Covariant metric tensor components
+g_11 = 1 / g11
+g_22 = 1 / g22
+g_33 = 1 / g33
+
+
+### Uncomment next 2 lines to allow non-periodic B.C. in y 
+#ixseps1 = 0
+#ixseps2 = 0
+
+[solver]
+mxstep = 40000
+
+[ddx]
+first=C2
+second=C4
+upwind=W3
+flux=split
+
+[ddy]
+first=C2
+second=C4
+upwind=W3
+flux=split
+
+[ddz]
+first=FFT
+second=FFT
+upwind=W3
+flux=split
+
+
+[conduction]  # Settings for the conduction model
+
+chi = 1.0
+
+### Setting for all variables
+[all] 
+
+### Some types of B.C.'s: (other can be found in /src/mesh/boundary_factory.cxx)
+# neumann
+# neumann2
+# dirichlet
+# dirichlet_o2
+### Possible regions for B.C.'s:
+# bndry_all
+# bndry_xin <- "left" x-point
+# bndry_xout <- "right" x-point
+# bndry_ydown <- "left" y-point
+# dbndry_yup <- "right" y-point
+#################
+
+bndry_xin = neumann2
+bndry_xout = neumann2
+
+### Settings for the T variable
+[T] 
+### Some variables are scaled automatically:
+# x (0, 1)
+# y (0, 2*pi)
+# z (0, 2*pi)
+#############################################
+
+scale = 1.0  # Size of the initial perturbation
+function = cos(2*y)
