@@ -7,30 +7,30 @@ timestep = 0.01  # Time between outputs
 
 #non_uniform = true
 
-MZ = 2
+MZ = 129
 #zmin = 0.
 #zmax = 1.
 
-[mesh]  # Mapping to cylinder: x -> r,  y -> phi,  z -> z
+[mesh]  # Mapping to cylinder: x -> z,  y -> r,  z -> phi
 
-nx = 68 # including 2*2 ghost points
+nx = 5 # including 2*2 ghost points
 ny = 128
 
 Rmin = 0.05
 Rmax = 1.8
 
-Rxy = Rmin + (Rmax - Rmin)*x   # Rxy = [Rmin, ..., Rmax]
-dr = (Rmax - Rmin) / (nx-4)
+Rxy = Rmin + (Rmax - Rmin)*y/(2*pi)   # as y is normalized to 0, 2*pi
+dr = (Rmax - Rmin) / ny
 
 Bxy = 1.
 Ly = 2*pi
-dy = Ly/ny
-dx = dr
+dx = Ly/ny
+dy = dr
 
 ### Contravariant metric tensor components
 g11 = 1.0
-g22 = 1.0/Rxy^2
-g33 = 1.0
+g22 = 1.0
+g33 = 1.0/Rxy^2
 
 ### Covariant metric tensor components
 g_11 = 1 / g11
@@ -39,8 +39,8 @@ g_33 = 1 / g33
 
 
 ### Uncomment next 2 lines to allow non-periodic B.C. in y 
-#ixseps1 = 0
-#ixseps2 = 0
+ixseps1 = 0
+ixseps2 = 0
 
 [solver]
 mxstep = 40000
@@ -84,8 +84,8 @@ chi = 1
 # dbndry_yup <- "right" y-point
 #################
 
-bndry_xin = neumann
-bndry_xout = neumann
+bndry_ydown = neumann
+bndry_yup = neumann
 
 ### Settings for the T variable
 [T] 
@@ -96,4 +96,4 @@ bndry_xout = neumann
 #############################################
 
 scale = 1.0  # Size of the initial perturbation
-function = cos(2*y)
+function = cos(2*z)
