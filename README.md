@@ -1,6 +1,4 @@
 # conduction-cylinder
-  Solving heat equation in cylindrical geometry with BOUT++
+  Solving heat equation in cylindrical geometry with BOUT++.
 
-  
-
-![alt tag](https://github.com/AlxMar/conduction-cylinder/blob/master/results1/tempBR00007.png)
+![alt tag](https://github.com/AlxMar/conduction-cylinder/blob/master/te-contour_ic_nonstnry_N511.png)
